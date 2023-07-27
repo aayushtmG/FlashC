@@ -1,6 +1,12 @@
-import { InferSchemaType, Schema, model } from "mongoose"
+import { Model, Schema, model } from "mongoose"
 
-const cardSchema = new Schema(
+interface ICard {
+  title: string
+  details: string
+}
+
+interface ICardMethods {}
+const cardSchema = new Schema<ICard>(
   {
     title: {
       type: String,
@@ -10,25 +16,17 @@ const cardSchema = new Schema(
       type: String,
       required: [true, "A card must contain the details or information"],
     },
-    date: {
-      type: Date,
-      default: Date.now,
-      select: true,
-    },
-    lastUpdated: {
-      type: Date,
-    },
   },
   {
     timestamps: true,
   }
 )
 
-type Card = InferSchemaType<typeof cardSchema>
+type CardModel = Model<ICard, {}, ICardMethods>
 
 cardSchema.pre(["find", "findOne", "findOneAndUpdate"], function (next) {
   this.select("-__v")
   next()
 })
 
-export default model<Card>("card", cardSchema)
+export default model<ICard, CardModel>("card", cardSchema)
