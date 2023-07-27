@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt"
 import { Model, model, Schema } from "mongoose"
 import AppError from "../utils/appError"
+import crypto from "crypto"
 
 export interface IUser {
   photo?: string | undefined
@@ -18,6 +19,7 @@ interface IUserMethods {
     password: string,
     hashedPassword: string
   ): Promise<boolean>
+  generateResetTokenOn(user: IUser): string
 }
 
 const userSchema = new Schema<IUser>(
@@ -76,5 +78,14 @@ userSchema.methods.compareWithHashedPassword = async (
 ) => {
   return await bcrypt.compare(password, hashedPassword)
 }
+userSchema.methods.generateResetTokenOn = (user: IUser) => {
+  const resetToken = crypto.randomBytes(32).toString("hex")
+  user.passwordResetToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex")
+  user.passwordResetTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000)
 
+  return resetToken
+}
 export default model<IUser, UserModel>("user", userSchema)

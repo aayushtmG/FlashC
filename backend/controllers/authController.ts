@@ -84,17 +84,6 @@ export const protect: RequestHandler = async (
   next()
 }
 
-const generateResetTokenOn = (user: IUser) => {
-  const resetToken = crypto.randomBytes(32).toString("hex")
-  user.passwordResetToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex")
-  user.passwordResetTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000)
-
-  return resetToken
-}
-
 export const forgotPassword: RequestHandler = catchError(
   async (req, res, next) => {
     //get the user according to the provided email
@@ -105,7 +94,7 @@ export const forgotPassword: RequestHandler = catchError(
       return next(new AppError("The user doesnt exist", 403))
     }
     //create a random reset token and save it to the user
-    const resetToken = generateResetTokenOn(user)
+    const resetToken = user.generateResetTokenOn(user)
     await user.save({
       validateBeforeSave: false,
     })
