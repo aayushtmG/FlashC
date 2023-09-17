@@ -3,6 +3,7 @@ import {
   deleteUser,
   getAllUsers,
   updateUser,
+  getCards,
 } from "../controllers/userController"
 import {
   logIn,
@@ -14,7 +15,8 @@ import {
 } from "../controllers/authController"
 const router = express.Router()
 
-router.route("/").get(protect, getAllUsers)
+router.route("/").get(getAllUsers)
+router.get("/cards", protect, getCards)
 router.post("/signup", signUp)
 router.post("/login", logIn)
 router.post("/forgotPassword", forgotPassword)

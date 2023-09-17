@@ -6,9 +6,10 @@ import {
   updateCard,
   getCard,
 } from "../controllers/cardController"
+import { protect } from "../controllers/authController"
 const router = express.Router()
 
-router.route("/").get(getAllCards).post(createCard)
+router.route("/").get(getAllCards).post(protect, createCard)
 router.route("/:id").delete(deleteCard).patch(updateCard).get(getCard)
 
 export default router

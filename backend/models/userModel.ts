@@ -11,6 +11,7 @@ export interface IUser {
   email?: string | undefined
   password?: string | undefined
   passwordConfirm?: string | undefined
+  cards: Schema.Types.ObjectId[]
 }
 
 interface IUserMethods {
@@ -53,6 +54,12 @@ const userSchema = new Schema<IUser>(
     photo: String,
     passwordResetToken: String,
     passwordResetTokenExpires: Date,
+    cards: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Card",
+      },
+    ],
   },
   {
     timestamps: true,
@@ -72,6 +79,12 @@ userSchema.pre("save", async function (next) {
   this.passwordConfirm = undefined
   next()
 })
+userSchema.pre("findOne", function (next) {
+  this.populate("cards", "-_id  title details")
+  next()
+})
+
+//INSTANCE METHODS
 userSchema.methods.compareWithHashedPassword = async (
   password: string,
   hashedPassword: string
@@ -88,4 +101,5 @@ userSchema.methods.generateResetTokenOn = (user: IUser) => {
 
   return resetToken
 }
-export default model<IUser, UserModel>("user", userSchema)
+
+export default model<IUser, UserModel>("User", userSchema)

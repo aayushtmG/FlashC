@@ -1,5 +1,7 @@
-import { NextFunction, RequestHandler, Response, Request } from "express"
+import { NextFunction, Request, RequestHandler, Response } from "express"
+import { Schema, get } from "mongoose"
 import Card from "../models/cardModel"
+import User, { IUser } from "../models/userModel"
 import catchError from "../utils/catchError"
 import FilterQuery from "../utils/filterQuery"
 
@@ -25,8 +27,22 @@ export const getCard: RequestHandler = catchError(async (req, res) => {
 
 // Creating new card
 export const createCard: RequestHandler = catchError(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (
+    req: Request & { user?: IUser & { _id: Schema.Types.ObjectId } },
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (!req.body.user) req.body.user = req.user?._id
+
     const card = await Card.create(req.body)
+
+    const user = await User.findByIdAndUpdate(
+      { _id: req.user?._id },
+      {
+        $push: { cards: card.id },
+      }
+    )
+
     res.status(201).json({
       status: "successs",
       newCard: card,

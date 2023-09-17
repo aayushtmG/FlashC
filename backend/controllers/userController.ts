@@ -2,6 +2,8 @@ import { RequestHandler, Request } from "express"
 import catchError from "../utils/catchError"
 import User, { IUser } from "../models/userModel"
 import AppError from "../utils/appError"
+import Card from "../models/cardModel"
+import { ObjectId } from "mongoose"
 
 export const getAllUsers: RequestHandler = catchError(
   async (req: Request & { user?: IUser }, res) => {
@@ -36,3 +38,16 @@ export const updateUser: RequestHandler = catchError(async (req, res, next) => {
     updatedUser,
   })
 })
+
+export const getCards: RequestHandler = catchError(
+  async (req: Request & { user?: IUser & { _id: ObjectId } }, res, next) => {
+    const userId = req.user?._id
+    const cards = await Card.find({
+      user: userId,
+    })
+    res.json({
+      status: "SUCCESS",
+      cards,
+    })
+  }
+)
