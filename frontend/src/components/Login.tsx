@@ -43,6 +43,7 @@ export default function Login() {
             <button className={`${styles.btn} bg-primary`}>
               <Link href="/signup">Sign up</Link>
             </button>
+            <button>hello</button>
           </div>
         </form>
       </div>
