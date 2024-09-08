@@ -4,7 +4,7 @@ import { IconContext } from "react-icons"
 
 const styles = {
   wrapper:
-    "container bg-primary mt-10 -skew-x-12 p-6 flex items-center justify-between",
+    "container bg-primary mt-10 -skew-x-12 p-6 flex items-center justify-between text-white",
   content: "font-bold",
   linkContainer: "flex justify-between gap-10",
   iconLink:

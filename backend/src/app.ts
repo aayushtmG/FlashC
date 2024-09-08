@@ -6,7 +6,7 @@ import errorHandler from "../controllers/errorContoller"
 const app = express()
 app.use(express.json())
 
-app.use("/api/v1/cards", cardRouter)
-app.use("/api/v1/users", userRouter)
+app.use("/api/cards", cardRouter)
+app.use("/api/users", userRouter)
 app.use(errorHandler)
 export default app

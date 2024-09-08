@@ -1,14 +1,20 @@
-import mongoose from "mongoose"
 import app from "./app"
-import "dotenv/config"
-const PORT = process.env.PORT
-const DB = process.env.DATABASE?.replace(
-  "<password>",
-  `${process.env.DATABASE_PASSWORD}`
-)
+const PORT = 8000
 
-mongoose.connect(`${DB}`).then(() => console.log("Connected to the Database"))
+const mysql = require("mysql2")
+
+// Create a connection to the database
+export const connectionPool = mysql
+  .createPool({
+    host: "localhost",
+    user: "root",
+    password: "secret@123",
+    database: "flashc",
+    waitForConnections: true,
+    connectionLimit: 10,
+  })
+  .promise()
 
 app.listen(PORT, () => {
-  console.log(`Listening to port: ${PORT}`)
+  console.log("listening to ", PORT)
 })

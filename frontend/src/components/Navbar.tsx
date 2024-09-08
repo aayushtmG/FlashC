@@ -23,7 +23,7 @@ export default function NavBar() {
             className=" border-2 px-4 py-1 -skew-x-6 hover:bg-blue-400 hover:text-primary 
           transition-colors duration-200 hover:scale-105"
           >
-            SignUp
+            <Link href="signup">Signup</Link>
           </button>
         </div>
       </nav>

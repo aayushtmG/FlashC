@@ -14,8 +14,12 @@ const styles = {
   btn: "py-2 text-white w-full rounded-md font-bold tracking-wide  ",
 }
 
-export default function Login() {
+export default function Signup() {
   const router = useRouter()
+  const handleSignup = () => {}
+  const handleLogin = () => {
+    router.push("login")
+  }
   return (
     <>
       <div className={styles.wrapper}>
@@ -26,7 +30,14 @@ export default function Login() {
               Username:
             </label>
             <input type="text" id="username" className={styles.input} />
-            <p className={styles.error}>Username Error</p>
+            <p className={styles.error}>Invalid Username</p>
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="email" className={styles.label}>
+              Email:
+            </label>
+            <input type="email" id="email" className={styles.input} />
+            <p className={styles.error}>Invalid Email</p>
           </div>
           <div className={styles.inputGroup}>
             <label htmlFor="password" className={styles.label}>
@@ -35,19 +46,24 @@ export default function Login() {
             <input type="password" id="password" className={styles.input} />
             <p className={styles.error}>password error</p>
           </div>
-          <div className="space-y-4 mt-2">
-            <button className={`${styles.btn} bg-blue-500`}>Log in</button>
+          <div className="space-y-4 mt-2  ">
+            <button
+              className={`${styles.btn} bg-primary`}
+              onClick={handleSignup}
+            >
+              Signup
+            </button>
             <div className="flex items-center">
               <div className={styles.line}></div>
               <div className="mx-2 uppercase font-bold text-sm">or</div>
               <div className={styles.line}></div>
             </div>
             <button
-              className={`${styles.btn} bg-primary`}
               type="button"
-              onClick={() => router.push("signup")}
+              className={`${styles.btn} bg-blue-500`}
+              onClick={handleLogin}
             >
-              Sign Up
+              Log in
             </button>
           </div>
         </form>

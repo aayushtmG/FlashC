@@ -6,9 +6,20 @@ import User, { IUser } from "../models/userModel"
 import AppError from "../utils/appError"
 import catchError from "../utils/catchError"
 import sendEmail from "../utils/email"
+import { connectionPool } from "../src/server"
 
 export const signUp: RequestHandler = catchError(async (req, res, next) => {
-  const user = await User.create(req.body)
+  const { username, email, password } = req.body
+  const result = await connectionPool.query(
+    `INSERT INTO Users(username,email,password) VALUES ('${username}', '${email}', '${password}')`
+  )
+  const userId = result[0].insertId
+
+  const [rows] = await connectionPool.query(
+    `SELECT username,email FROM Users where user_id=${userId}`
+  )
+  const user = rows.length > 0 ? rows[0] : null
+
   res.status(201).json({
     status: "SUCCESS",
     user,
@@ -16,32 +27,22 @@ export const signUp: RequestHandler = catchError(async (req, res, next) => {
 })
 
 export const logIn: RequestHandler = catchError(async (req, res, next) => {
-  if (!req.body.email || !req.body.password) {
-    return next(new AppError("Please provide both EMAIL and PASSWORD", 400))
-  }
   const { email, password } = req.body
 
-  const user = await User.findOne({ email }).select("+password")
-  if (
-    !user ||
-    !(await user.compareWithHashedPassword(password, user.password as string))
-  ) {
-    return next(
-      new AppError("Incorrect Credentials! Please check your password?", 403)
-    )
-  }
-  const token = jwt.sign(
-    { id: user._id },
-    process.env.JWT_SECRETKEY as string,
-    {
-      expiresIn: process.env.JWT_EXPIRESIN,
-    }
+  const [result] = await connectionPool.query(
+    `select email,password from Users where email='${email}' and password='${password}'`
   )
+
+  if (result.length == 0) {
+    return res.status(401).json({
+      status: "Failed",
+      message: "Invalid credentials!!!",
+    })
+  }
 
   res.status(200).json({
     status: "SUCCESS",
-    token,
-    user,
+    message: "logged in",
   })
 })
 

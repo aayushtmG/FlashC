@@ -4,15 +4,14 @@ import User, { IUser } from "../models/userModel"
 import AppError from "../utils/appError"
 import Card from "../models/cardModel"
 import { ObjectId } from "mongoose"
+import { connectionPool } from "../src/server"
 
 export const getAllUsers: RequestHandler = catchError(
   async (req: Request & { user?: IUser }, res) => {
-    const users = await User.find()
-    res.status(200).json({
-      status: "SUCCESS",
-      currentUser: req.user,
-      users,
-    })
+    const [userList] = await connectionPool.query(
+      "Select user_id,username, email from Users"
+    )
+    res.status(200).json(userList)
   }
 )
 
