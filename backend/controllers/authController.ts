@@ -30,7 +30,7 @@ export const logIn: RequestHandler = catchError(async (req, res, next) => {
   const { email, password } = req.body
 
   const [result] = await connectionPool.query(
-    `select email,password from Users where email='${email}' and password='${password}'`
+    `select email,password,username from Users where email='${email}' and password='${password}'`
   )
 
   if (result.length == 0) {
@@ -39,10 +39,11 @@ export const logIn: RequestHandler = catchError(async (req, res, next) => {
       message: "Invalid credentials!!!",
     })
   }
+  const user = result[0]
 
   res.status(200).json({
     status: "SUCCESS",
-    message: "logged in",
+    user,
   })
 })
 

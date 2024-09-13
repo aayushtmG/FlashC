@@ -1,10 +1,9 @@
 import React from "react"
 import { FaFacebook, FaGithub, FaXTwitter } from "react-icons/fa6"
-import { IconContext } from "react-icons"
 
 const styles = {
   wrapper:
-    " bg-primary mt-10 p-6  px-10 flex max-sm:flex-col-reverse max-sm:gap-4 items-center justify-between text-white",
+    " bg-primary mt-10 p-4  px-10 flex max-sm:flex-col-reverse max-sm:gap-4 items-center justify-between text-white",
   content: "font-bold",
   linkContainer: "flex justify-between gap-10",
   iconLink:

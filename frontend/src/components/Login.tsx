@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import axios, { AxiosError } from "axios"
+import { useUser } from "@/context/UserContext"
 const styles = {
   wrapper:
     "p-12 shadow-xl rounded-md w-max flex flex-col items-center m-auto my-20 ",
@@ -20,7 +21,7 @@ const styles = {
 export default function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-
+  const { setUser } = useUser()
   const [error, setError] = useState("")
   const router = useRouter()
   const handleLogin = async () => {
@@ -29,7 +30,7 @@ export default function Login() {
         email: username,
         password,
       })
-      alert("Logging in")
+      setUser(result.data.user)
       router.push("/")
     } catch (err: AxiosError | any) {
       setError(err.response.data.message)
