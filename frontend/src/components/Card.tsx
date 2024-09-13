@@ -8,7 +8,7 @@ interface cardProps {
   back?: { style: string; content: string }
 }
 const styles = {
-  cardStyles: `w-[300px] h-[350px] text-2xl font-bold  rounded-xl absolute preserve-3d  `,
+  cardStyles: `w-[300px] h-[350px] text-2xl font-bold absolute  rounded-xl preserve-3d  `,
   defaultFront:
     "backface-hidden absolute  w-full h-full flex justify-center items-center  rounded-xl",
   defaultBack:

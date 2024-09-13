@@ -4,18 +4,19 @@ import { IconContext } from "react-icons"
 
 const styles = {
   wrapper:
-    "container bg-primary mt-10 -skew-x-12 p-6 flex items-center justify-between text-white",
+    " bg-primary mt-10 p-6  px-10 flex max-sm:flex-col-reverse max-sm:gap-4 items-center justify-between text-white",
   content: "font-bold",
   linkContainer: "flex justify-between gap-10",
   iconLink:
-    "text-3xl hover:fill-blue-400 hover:scale-110 hover:-translate-y-1 duration-300  ",
+    "text-2xl 3xl:text-3xl hover:fill-blue-400 hover:scale-110 hover:-translate-y-1 duration-300  ",
 }
 
 function Footer() {
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.content}>
-        Created by :<span className="text-3xl ml-4">Aayush Tamang</span>
+        Created by :
+        <span className="xl:text-2xl 3xl:text-3xl ml-4">Aayush Tamang</span>
       </h2>
       <ul className={styles.linkContainer}>
         <li>

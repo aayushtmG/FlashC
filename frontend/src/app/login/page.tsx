@@ -3,7 +3,7 @@ import Login from "@/components/Login"
 function Page() {
   return (
     <>
-      <div className="container m-auto my-1">
+      <div>
         <NavBar></NavBar>
         <Login></Login>
       </div>
