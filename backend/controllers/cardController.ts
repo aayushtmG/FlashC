@@ -4,11 +4,14 @@ import Card from "../models/cardModel"
 import User, { IUser } from "../models/userModel"
 import catchError from "../utils/catchError"
 import FilterQuery from "../utils/filterQuery"
+import { connectionPool } from "../src/server"
 
 //Getting all cards
 export const getAllCards: RequestHandler = catchError(async (req, res) => {
-  let query = new FilterQuery(Card.find(), req.query).sort().query
-  const cards = await query
+  const { deck_id, user_id } = req.query
+  const cards = await connectionPool.query(
+    `SELECT * FROM Cards where deck_id = ${deck_id} and user_id = ${user_id}`
+  )
   res.status(200).json({
     status: "successs",
     results: cards.length,

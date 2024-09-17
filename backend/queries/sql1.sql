@@ -11,9 +11,17 @@ CREATE TABLE Users (
 CREATE TABLE Cards (
     card_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
+    deck_id INT NOT NULL,
     front_text TEXT NOT NULL,         -- The question or prompt side of the card
     back_text TEXT NOT NULL,          -- The answer or response side of the card
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+    FOREIGN key (deck_id) REFERENCES Decks(deck_id) ON DELETE CASCADE
 );
+
+-- Deck Table
+CREATE TABLE Decks (
+    deck_id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(30)
+)
