@@ -28,11 +28,16 @@ export default function NavBar() {
           />
         )}
         {user ? (
-          <div className="space-x-4 flex">
+          <div className="space-x-4 flex items-center">
             <Link href={"/dashboard"}>Dashboard</Link>
-            <Link href={"/"} onClick={handleLogout}>
-              Log Out
-            </Link>
+            <button
+              className=" border-2 px-4 py-1 -skew-x-6 hover:bg-blue-400 hover:text-primary 
+          transition-colors duration-200 hover:scale-105  xl:text-lg"
+            >
+              <Link href={"/"} onClick={handleLogout}>
+                Logout
+              </Link>
+            </button>
           </div>
         ) : (
           // login section
