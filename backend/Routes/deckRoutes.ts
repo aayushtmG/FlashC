@@ -3,6 +3,6 @@ import { getUserDecks } from "../controllers/deckController"
 
 const router = express.Router()
 
-router.route("/:userId").get(getUserDecks)
+// router.route("/:userId").get(getUserDecks)
 
 export default router

@@ -31,7 +31,7 @@ export default function Login() {
         password,
       })
       setUser(result.data.user)
-      router.push("/")
+      router.push("/dashboard")
     } catch (err: AxiosError | any) {
       setError(err.response.data.message)
     }

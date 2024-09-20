@@ -5,12 +5,12 @@ import { FaPlus } from "react-icons/fa" // Importing a plus icon from react-icon
 const AddDeckCard = () => {
   const handleAddDeck = () => {
     // Logic to handle adding a new deck
-    console.log("Add new deck")
+    alert("Adding new deck")
   }
 
   return (
-    <div className="max-xl:hidden flex items-center justify-center w-full h-full p-4">
-      <div className="flex flex-col items-center justify-center w-full max-w-xs h-[200px] xl:h-[400px] bg-gray-100 border-2 border-gray-300 rounded-lg shadow-lg">
+    <div className="max-xl:hidden flex items-center justify-center p-4">
+      <div className="flex flex-col items-center justify-center max-w-xs md:w-[300px] h-[200px] xl:h-[400px] bg-gray-100 border-2 border-gray-300 rounded-lg shadow-lg">
         <p className="text-gray-700 text-lg mb-4">Add a Deck</p>
         <button
           onClick={handleAddDeck}

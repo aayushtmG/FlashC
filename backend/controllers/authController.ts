@@ -30,7 +30,7 @@ export const logIn: RequestHandler = catchError(async (req, res, next) => {
   const { email, password } = req.body
 
   const [result] = await connectionPool.query(
-    `select email,password,username from Users where email='${email}' and password='${password}'`
+    `select user_id,email,password,username from Users where email='${email}' and password='${password}'`
   )
 
   if (result.length == 0) {

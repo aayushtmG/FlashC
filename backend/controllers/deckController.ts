@@ -5,7 +5,6 @@ import { connectionPool } from "../src/server"
 
 export const getUserDecks = catchError(async (req, res, next) => {
   try {
-    console.log(req.params)
     const { userId } = req.params
     const [decks] = await connectionPool.query(
       `select * from Decks where user_id = ${userId}`

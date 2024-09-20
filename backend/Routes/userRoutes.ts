@@ -5,6 +5,7 @@ import {
   updateUser,
   getCards,
 } from "../controllers/userController"
+import { getUserDecks } from "../controllers/deckController"
 import {
   logIn,
   signUp,
@@ -23,5 +24,6 @@ router.post("/forgotPassword", forgotPassword)
 router.post("/resetPassword/:id", resetPassword)
 router.patch("/updatePassword", protect, updatePassword)
 router.route("/:id").delete(deleteUser).patch(updateUser)
+router.get("/:userId/decks", getUserDecks)
 
 export default router
