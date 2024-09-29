@@ -1,22 +1,22 @@
 import { useState } from "react"
+import Card from "./Card"
 
-const Slider = () => {
-  const images = [
-    "https://via.placeholder.com/800x400/FF0000/FFFFFF?text=Slide+1",
-    "https://via.placeholder.com/800x400/00FF00/FFFFFF?text=Slide+2",
-    "https://via.placeholder.com/800x400/0000FF/FFFFFF?text=Slide+3",
-  ]
+const Slider = ({
+  cards,
+}: {
+  cards: Array<{ front_text: string; back_text: string }>
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? cards.length - 1 : prevIndex - 1
     )
   }
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === cards.length - 1 ? 0 : prevIndex + 1
     )
   }
 
@@ -27,14 +27,22 @@ const Slider = () => {
           className="flex transition-transform ease-out duration-500"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Slide ${index}`}
-              className="w-full object-cover"
-            />
-          ))}
+          {cards &&
+            cards.map((card, index) => (
+              <div key={index} className="w-full flex-shrink-0">
+                <Card
+                  style="relative w-[90%] mx-auto "
+                  front={{
+                    style: "bg-blue-500",
+                    content: card.front_text,
+                  }}
+                  back={{
+                    content: card.back_text,
+                    style: "bg-red-300",
+                  }}
+                />
+              </div>
+            ))}
         </div>
       </div>
 
@@ -53,19 +61,6 @@ const Slider = () => {
       >
         &#8250;
       </button>
-
-      {/* Dots */}
-      <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-        {/* {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full ${
-              currentIndex === index ? "bg-gray-800" : "bg-gray-400"
-            }`}
-          ></button>
-        ))} */}
-      </div>
     </div>
   )
 }

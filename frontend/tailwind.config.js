@@ -9,6 +9,9 @@ const MyClasses = plugin(function ({ addUtilities }) {
     ".backface-hidden": {
       backfaceVisibility: "hidden",
     },
+    ".backface-visible": {
+      backfaceVisibility: "visible",
+    },
     ".flip": {
       transform: "rotateY(180deg)",
     },

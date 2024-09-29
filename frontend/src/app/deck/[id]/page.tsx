@@ -10,21 +10,24 @@ function Deck({ params }: { params: { id: string } }) {
 
   const fetchCards = async () => {
     try {
-      const result = await axios.get(
-        `http://127.0.0.1:8000/api/decks/${deck_id}/cards`
-      )
+      const result = (
+        await axios.get(`http://127.0.0.1:8000/api/decks/${deck_id}/cards`)
+      ).data
+      setCards(result.cards)
     } catch (err) {
       console.log(err)
     }
   }
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    fetchCards()
+  }, [])
 
   return (
     <>
       <NavBar></NavBar>
       <div className="pt-32">
-        <Slider></Slider>
+        <Slider cards={cards}></Slider>
       </div>
     </>
   )
