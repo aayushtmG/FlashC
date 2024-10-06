@@ -9,9 +9,9 @@ interface cardProps {
 const styles = {
   cardStyles: `w-[300px] h-[350px] text-2xl font-bold absolute rounded-xl preserve-3d cursor-pointer`,
   defaultFront:
-    "card-front absolute w-full h-full flex justify-center items-center rounded-xl",
+    "absolute w-full h-full flex justify-center items-center rounded-xl ",
   defaultBack:
-    "card-back absolute w-full h-full flex justify-center items-center  rounded-xl   ",
+    "absolute w-full h-full flex justify-center items-center  rounded-xl   ",
 }
 
 export default function Card({ style, front, back }: cardProps) {

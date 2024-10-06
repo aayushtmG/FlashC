@@ -18,7 +18,6 @@ function Deck({ params }: { params: { id: string } }) {
       console.log(err)
     }
   }
-
   useEffect(() => {
     fetchCards()
   }, [])
@@ -26,9 +25,7 @@ function Deck({ params }: { params: { id: string } }) {
   return (
     <>
       <NavBar></NavBar>
-      <div className="pt-32">
-        <Slider cards={cards}></Slider>
-      </div>
+      <div className="pt-32">{cards && <Slider cards={cards}></Slider>}</div>
     </>
   )
 }

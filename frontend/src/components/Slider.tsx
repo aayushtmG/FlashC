@@ -21,7 +21,7 @@ const Slider = ({
   }
 
   return (
-    <div className="relative w-full max-w-3xl mx-auto">
+    <div className="relative  max-w-xl mx-auto ">
       <div className="overflow-hidden">
         <div
           className="flex transition-transform ease-out duration-500"
@@ -31,14 +31,14 @@ const Slider = ({
             cards.map((card, index) => (
               <div key={index} className="w-full flex-shrink-0">
                 <Card
-                  style="relative w-[90%] mx-auto "
+                  style="relative w-[80%] h-[400px] mx-auto "
                   front={{
-                    style: "bg-blue-500",
+                    style: "bg-blue-500 flip-card-front",
                     content: card.front_text,
                   }}
                   back={{
                     content: card.back_text,
-                    style: "bg-red-300",
+                    style: "bg-red-300 flip-card-back",
                   }}
                 />
               </div>
