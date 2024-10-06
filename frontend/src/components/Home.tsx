@@ -59,11 +59,19 @@ const Home = () => {
         </div>
       </div>
       <div className="h-screen hidden xl:flex justify-center items-center space-x-32 relative">
-        <Card
-          style="w-[400px] h-[400px] relative "
-          front={{ style: "bg-blue-500", content: "Frontend" }}
-          back={{ content: "BackEnd", style: "bg-red-300" }}
-        ></Card>
+        <div className="rotating-card-container">
+          <Card
+            style="w-[400px] h-[400px] relative rotating-card-inner"
+            front={{
+              style: "bg-blue-500 text-white rotating-card-front",
+              content: "Frontend",
+            }}
+            back={{
+              content: "BackEnd",
+              style: "bg-blue-900 text-white rotating-card-back",
+            }}
+          ></Card>
+        </div>
         <div id="aboutSection" className="w-1/2">
           <h2 className={styles.aboutHeading}>About</h2>
           <p className={`${styles.description} px-8 text-justify 2xl:text-3xl`}>

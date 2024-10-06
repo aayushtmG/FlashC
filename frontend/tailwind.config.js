@@ -1,22 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-import plugin from "tailwindcss/plugin"
-const MyClasses = plugin(function ({ addUtilities }) {
-  addUtilities({
-    ".preserve-3d": {
-      transformStyle: "preserve-3d",
-    },
-
-    ".backface-hidden": {
-      backfaceVisibility: "hidden",
-    },
-    ".backface-visible": {
-      backfaceVisibility: "visible",
-    },
-    ".flip": {
-      transform: "rotateY(180deg)",
-    },
-  })
-})
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -39,5 +21,5 @@ module.exports = {
       },
     },
   },
-  plugins: [MyClasses],
+  plugins: [],
 }

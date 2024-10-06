@@ -9,9 +9,9 @@ interface cardProps {
 const styles = {
   cardStyles: `w-[300px] h-[350px] text-2xl font-bold absolute rounded-xl preserve-3d cursor-pointer`,
   defaultFront:
-    "backface-hidden absolute w-full h-full flex justify-center items-center rounded-xl",
+    "card-front absolute w-full h-full flex justify-center items-center rounded-xl",
   defaultBack:
-    "backface-hidden absolute w-full h-full flex justify-center items-center  rounded-xl flip ",
+    "card-back absolute w-full h-full flex justify-center items-center  rounded-xl   ",
 }
 
 export default function Card({ style, front, back }: cardProps) {
@@ -26,7 +26,9 @@ export default function Card({ style, front, back }: cardProps) {
       <div className={`${styles.defaultFront} ${front?.style}  opacity-100 `}>
         {front?.content}
       </div>
-      <div className={`${styles.defaultBack} `}>{back?.content}</div>
+      <div className={`${styles.defaultBack} ${back?.style}`}>
+        {back?.content}
+      </div>
     </div>
   )
 }
