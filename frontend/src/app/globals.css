@@ -8,3 +8,35 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.animate-tilt-left {
+  animation: tilt_left 1.5s ease-out forwards;
+}
+
+.animate-tilt-right {
+  animation: tilt_right 1.5s ease-out forwards;
+}
+
+.animate-rotate {
+  animation: rotation 2s ease-in-out infinite;
+}
+
+@keyframes {
+}
+
+@keyframes tilt_left {
+  50% {
+    transform: rotate(-10deg) translateX(-60px);
+  }
+  100% {
+    transform: rotate(-10deg) translateX(-60px);
+  }
+}
+@keyframes tilt_right {
+  50% {
+    transform: rotate(10deg) translateX(60px);
+  }
+  100% {
+    transform: rotate(10deg) translateX(60px);
+  }
+}

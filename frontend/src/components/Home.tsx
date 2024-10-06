@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import Card from "@/components/Card"
-import { motion } from "framer-motion"
 import Image from "next/image"
 
 const styles = {
@@ -10,6 +9,7 @@ const styles = {
   description: "text-gray-400 tracking-widest text-2xl italic font-medium mt-2",
   aboutHeading:
     "italic underline max-xl:text-center decoration-2 underline-offset-4 tracking-widest font-bold  text-primary pl-8 text-3xl",
+  animateX: "animate ",
 }
 
 const Home = () => {
@@ -47,11 +47,12 @@ const Home = () => {
         </div>
         {/* Card showcase */}
         <div className="hidden xl:flex w-1/3 justify-center  ">
-          <Card style="-translate-x-20 translate-y-2 -rotate-12 bg-blue-800"></Card>
-          <Card style=" translate-x-20 translate-y-4 rotate-12 bg-primary"></Card>
+          {/* <Card style="-translate-x-20 translate-y-2 -rotate-12 bg-blue-800 animate-[tiltLeft_1s_ease-out] animation-delay-500 "></Card> */}
+          <Card style=" bg-blue-500 animate-tilt-left"></Card>
+          <Card style="bg-green-500 animate-tilt-right"></Card>
           <Card
             front={{
-              style: "bg-black text-yellow-500",
+              style: "text-yellow-500 bg-black",
               content: "Front Side",
             }}
           ></Card>
@@ -59,7 +60,7 @@ const Home = () => {
       </div>
       <div className="h-screen hidden xl:flex justify-center items-center space-x-32 relative">
         <Card
-          style="-translate-y-[50%] w-[400px] h-[400px]"
+          style="w-[400px] h-[400px] relative "
           front={{ style: "bg-blue-500", content: "Frontend" }}
           back={{ content: "BackEnd", style: "bg-red-300" }}
         ></Card>
